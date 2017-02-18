@@ -15,11 +15,13 @@ module.exports = {
                     emit(':tell', 'There are no upcoming meetups');
                 } else {
                     const nextEvent = events[0];
-                    const time = moment(nextEvent.time).format('YYYYMMDD');
-                    emit(':tell', `
-                        The next meetup is on
-                        <say-as interpret-as="date">${time}</say-as>
-                    `);
+                    const time = moment(nextEvent.time);
+                    emit(
+                        ':tell',
+                        `The next meetup is on
+                        <say-as interpret-as="date">${time.format('YYYYMMDD')}</say-as>.
+                        ${time.diff(moment(), 'days')} days from now.`
+                    );
                 }
             })
             .catch(() => {
