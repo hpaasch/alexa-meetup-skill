@@ -1,0 +1,36 @@
+service: alexa-meetup-skill
+provider:
+  name: aws
+  runtime: nodejs4.3
+
+package:
+  exclude:
+    - coverage/**
+    - node_modules/**
+    - src/package.json
+    - test/**
+    - .editorconfig
+    - .env-*
+    - .envrc
+    - .eslint*
+    - .gitignore
+    - .node-version
+    - .travis.yml
+    - deploy.sh
+    - install.sh
+    - package.json
+    - README.md
+
+functions:
+  alexa:
+    handler: src/alexa.handler
+    environment:
+      ALEXA_APP_ID: ${env:ALEXA_APP_ID}
+      MEETUP_API_URL: https://api.meetup.com
+      MEETUP_URL_NAME: ${env:MEETUP_URL_NAME}
+    events:
+      - alexaSkill
+
+#resources:
+#  Resources:
+#  Outputs:
